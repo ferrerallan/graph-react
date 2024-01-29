@@ -5,50 +5,63 @@ const Graph = ({ nodes, links }) => {
     const svgRef = useRef();
 
     useEffect(() => {
-        const width = 1024;
-        const height = 768;
+        const width = 2000;
+        const height = 1000;
 
         d3.select(svgRef.current).selectAll("*").remove();
 
         const svg = d3.select(svgRef.current)
             .attr("width", width)
-            .attr("height", height);
+            .attr("height", height)
+            .call(d3.zoom().on("zoom", (event) => {
+                container.attr("transform", event.transform);
+            }))
+            .append("g");
+
+        const container = svg.append("g");
+
+        // Encontrar o valor mínimo e máximo da propriedade 'size' entre os nós
+        const maxSize = d3.max(nodes, d => d.size);
+        const minSize = d3.min(nodes, d => d.size);
+
+        // Definir o intervalo de tamanho desejado para os nós (por exemplo, entre 5 e 30)
+        const sizeScale = d3.scaleLinear()
+                            .domain([minSize, maxSize])
+                            .range([5, 30]);
 
         const simulation = d3.forceSimulation(nodes)
-            .force("link", d3.forceLink(links).id(d => d.id))
-            .force("charge", d3.forceManyBody().strength(-420)) 
-            .force("center", d3.forceCenter(width / 2, height / 2));
+            .force("link", d3.forceLink(links).id(d => d.id).distance(100))
+            .force("charge", d3.forceManyBody().strength(-400))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collide", d3.forceCollide().radius(d => sizeScale(d.size) + 10));
 
-        const link = svg.append("g")
+        const link = container.append("g")
             .attr("stroke", "#999")
-            .attr("stroke-width", 5)
+            .attr("stroke-width", 3)
             .selectAll("line")
             .data(links)
             .join("line");
 
-        const node = svg.append("g")
+        const node = container.append("g")
             .selectAll("circle")
             .data(nodes)
             .join("circle")
-            .attr("r", d => d.size)
-            .attr("fill", "#0081EB")
+            .attr("r", d => sizeScale(d.size))
+            .attr("fill", d => getRandomDarkColor())
             .attr("opacity", 1)
             .attr("stroke", "#ddd")
             .attr("stroke-width", 3);
 
-        // Adiciona texto dentro dos nós
-        const nodeText = svg.append("g")
+        const nodeText = container.append("g")
             .selectAll("text")
             .data(nodes)
             .join("text")
             .text(d => d.id)
-            .attr("x", d => d.x)
-            .attr("y", d => d.y)
             .attr("text-anchor", "middle")
-            .attr("dy", ".35em") // Centraliza verticalmente
-            .style("pointer-events", "none") // Impede que o texto interfira com o arrasto
-            .style("fill", "white")
-            .style("font-size", "10px"); ;
+            .attr("dy", ".35em")
+            .style("pointer-events", "none")
+            .style("fill", "black")
+            .style("font-size", "10px");
 
         const drag = simulation => {
             function dragstarted(event, d) {
@@ -95,5 +108,15 @@ const Graph = ({ nodes, links }) => {
 
     return <svg ref={svgRef}></svg>;
 };
+
+// Função para obter uma cor aleatória mais escura
+function getRandomDarkColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 10)]; // Gera cores mais escuras
+    }
+    return color;
+}
 
 export default Graph;
