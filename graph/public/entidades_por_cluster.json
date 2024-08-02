@@ -1,1 +1,20 @@
-{"0": {"Viagem no Tempo": 2, "Fic\u00e7\u00e3o Cient\u00edfica": 14, "Sobreviv\u00eancia": 2, "A\u00e7\u00e3o, Fic\u00e7\u00e3o Cient\u00edfica": 4, "Filme_Interstellar": 2, "Lista_TopFic\u00e7\u00e3oCient\u00edfica": 2, "Busca_FilmesDeFic\u00e7\u00e3oCientifica": 2, "Not\u00edcia_Bastidores_Interestelar": 1, "Filme_BladeRunner": 2, "Filme_TheMartian": 2, "Not\u00edcia_Inova\u00e7\u00f5esCi\u00eancia": 1, "A\u00e7\u00e3o, Suspense": 2}, "1": {"Romance": 40, "Musicais e Dan\u00e7a": 4, "Busca_FilmesDeRomance": 4, "Lista_RomancesInesqueciveis": 4, "Filme_TheNotebook": 4, "Filme_Titanic": 4, "Not\u00edcia_FestivalRomance": 4, "Filme_LaLaLand": 4, "Musical, Romance": 4}, "2": {"A\u00e7\u00e3o, Suspense": 9, "A\u00e7\u00e3o": 22, "Apocalipse e P\u00f3s-Apocal\u00edptico": 3, "Distopias Futuristas": 1, "Espionagem e Conspira\u00e7\u00e3o": 2, "Super-her\u00f3is": 3, "Filme_DieHard": 4, "Lista_TopA\u00e7\u00e3o": 4, "Not\u00edcia_EstreiaA\u00e7\u00e3o2024": 4, "Filme_MadMax": 4, "Busca_FilmesDeA\u00e7\u00e3o": 2, "Busca_TopGunMaverick": 1, "Filme_JohnWick": 2, "Filme_Vingadores": 1, "Busca_Thor": 1, "A\u00e7\u00e3o, Distopia": 4, "A\u00e7\u00e3o, Super-her\u00f3is": 2}}
+{
+    "0": {
+        "Filmelier": {"frequency": 50, "connections": {"Ação": 0.5, "Aventura": 0.7, "Suspense": 0.2}},
+        "Ação": {"frequency": 20, "connections": {}},
+        "Aventura": {"frequency": 20, "connections": {}},
+        "Suspense": {"frequency": 1, "connections": {}}
+    },
+    "1": {
+        "Netflix": {"frequency": 100, "connections": {"Ação": 2, "Aventura": 0.8, "Suspense": 0.3}},
+        "Ação": {"frequency": 20, "connections": {}},
+        "Aventura": {"frequency": 30, "connections": {}},
+        "Suspense": {"frequency": 1, "connections": {}}
+    },
+    "2": {
+        "Adrenalina Pura": {"frequency": 50, "connections": {"Ação": 0.7, "Aventura": 0.9, "Suspense": 0.4}},
+        "Ação": {"frequency": 20, "connections": {}},
+        "Aventura": {"frequency": 20, "connections": {}},
+        "Suspense": {"frequency": 30, "connections": {}}
+    }
+}
